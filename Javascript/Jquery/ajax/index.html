@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Testeo AJAX de Jquery</title>
+<script src="../jquery.js" type="text/javascript"></script>
+<script>
+
+$(document).ready(function(){
+	
+	// ---------- Test 1: Ajax simple -----------
+	console.group('Test1: Ajax simple');
+	
+		$.ajax({
+			url: 'ajax_simple.php',
+			success: function(data, textStatus, jqXHR) {
+				$('#result1').html(data);
+			}
+		});
+		
+	console.groupEnd();
+	// ---------- /Test 1: Ajax simple -----------
+	
+	
+	
+	// ---------- Test 2: Ajax lento con loading -----------
+	console.group('Test2: Ajax lento con loading');
+		$('#loading2').show();
+		
+		$.ajax({
+			url: 'ajax_lento.php',
+			success: function(data, textStatus, jqXHR) {
+				$('#result2').html(data);
+				$('#loading2').hide();
+			}
+		});
+		
+		
+	console.groupEnd();
+	// ---------- /Test 2: Ajax lento con loading -----------
+	
+	
+	// ---------- Test 3: Ajax lento con loading (Configuración por defecto) -----------
+	console.group('Test3: Ajax lento con loading (Configuración por defecto)');
+		$('#loading3').show();
+		
+		$.ajaxSetup({
+			type: 'POST'
+		});
+		
+		$.ajax({
+			url: 'ajax_lento.php',
+			success: function(data, textStatus, jqXHR) {
+				$('#result3').html(data);
+				$('#loading3').hide();
+				console.log(this);
+			},
+			beforeSend: function(jqXHR, settings) {
+				console.log(jqXHR);
+				//settings.type = 'GET';
+				
+			}
+		});
+		
+		
+	console.groupEnd();
+	// ---------- /Test 3: Ajax lento con loading (Configuración por defecto) -----------
+	
+	
+	
+	
+	
+	
+		
+	
+});
+
+</script>
+<style>
+
+.ajaxLoadingSmall {
+	background-color: transparent;
+	background-image: url('ajax_loading_small.gif');
+	background-position: center center;
+	background-repeat: no-repeat;
+	padding: 4px 8px;
+	display: none;
+}
+
+</style>
+
+</head>
+
+<body>
+<h1>Testeo de funciones ajax de jquery</h1>
+
+<span class="ajaxLoadingSmall"></span>
+
+
+<!-----------------------------[ Test 1 ]----------------------------->
+<h2>Testeo 1: ajax simple</h2>
+<div id="result1"></div>
+<!-----------------------------[ /Test 1 ]----------------------------->
+
+
+<!-----------------------------[ Test 2 ]----------------------------->
+<h2>Testeo 2: ajax lento con loading</h2>
+<span id="loading2" class="ajaxLoadingSmall"></span>
+<div id="result2"></div>
+<!-----------------------------[ /Test 2 ]----------------------------->
+
+
+<!-----------------------------[ Test 3 ]----------------------------->
+<h2>Testeo 3: ajax lento con loading</h2>
+<span id="loading3" class="ajaxLoadingSmall"></span>
+<div id="result3"></div>
+<!-----------------------------[ /Test 3 ]----------------------------->
+
+
+
+
+</body>
+</html>

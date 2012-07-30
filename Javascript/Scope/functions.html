@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Testeo de funciones</title>
+</head>
+
+<body>
+<h1>Testeo de funciones</h1>
+
+<script>
+
+console.group("----- Funciones -----");
+
+
+// Declaración típica
+function mensaje1() {
+    console.log('Mensaje 1');
+}
+
+// Funcion anonima asignada a variable
+mensaje2 = function () {
+    console.log('Mensaje 2');
+}
+
+// Funcion normal asignada a variable con el mismo nombre
+mensaje3 = function mensaje3() {
+    console.log('Mensaje 3');
+}
+
+// Funcion normal asignada a variable con otr nombre
+mensaje4 = function mensaje4Alias() {
+    console.log('Mensaje 4');
+}
+
+// function expression  
+function mensaje5() {
+    console.log('Mensaje 5');
+}
+
+mensaje1(); // ok
+mensaje2(); // ok
+mensaje3(); // ok
+mensaje4(); // ok
+//mensaje4Alias(); // Esta no está definida, tira error
+//mensaje5();
+console.groupEnd();
+
+console.group("----- Scoping -----");
+
+var miVariable = 10; // Variable de ambito global (tmb lo podria haber hecho sin el var, total es global igual)
+
+
+function miFuncion1() {
+ miVariable = 11;     // Esto cambiaria el valor de la variable global salvo por el hecho de que en la misma funcion se redefine la variable
+ var miVariable = 22; // Define una variable de ambito local y la inicializa con 22.  
+                      /* 
+                       * El valor de la variable global sigue siendo 10 y no se puede volver a cambiar porque la referencia 
+                       * a la variable global fue reemplazada por la nueva variable local
+                       */
+}
+
+function miFuncion2(miVariable) {
+    miVariable = 15; // Por mas que parezca que se accede a la variable global no es asi
+                     // Recibir por parámetro una variable con el mismo nombre que una global, 
+                     // es lo mismo que definirla al inicio de la funcion con: var miVariable = "Contenido del parámetro1";
+}
+
+
+function miFuncion3() {
+    miVariable = 11; // Cambia el valor de la variable global porque no redefine la variable en ninguna parte de la función
+}
+
+miFuncion1();
+miFuncion2();
+miFuncion3();
+
+// El resultado final de la variable global seguira siendo 11;
+console.log(miVariable); 
+console.groupEnd();
+
+console.group("----- Private enviroment -----");
+
+var a = 4;
+
+(function(a) {
+   console.log(a);
+})(a);
+
+
+console.groupEnd();
+
+</script>
+
+</body>
+</html>

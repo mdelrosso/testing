@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Testeo de scoping, nested functions y demas cosas avanzadas de javascript</title>
+</head>
+
+<body>
+<h1>Testeo de scoping, nested functions y demas cosas avanzadas de javascript</h1>
+
+<div id="divPrueba"></div>
+<div id="divPrueba2"></div>
+
+
+
+<script>
+
+
+// Testeo de scoping en javascript
+
+// Object
+var object = {  value: 5 }
+
+// Variable
+var value = 4;
+
+// No modifica el valor global del objeto
+function duplicateObjectValue(object) {
+	object = { value: object.value*2  }
+	
+}
+
+// Modifica el valor de la propiedad del objeto porque este no es reeemplazado, solo se modifica una variable de el
+// es como modificar el valor de un array
+function duplicateObjectValue2(object) {
+	object.value = object.value*2;
+}
+
+
+// No se modifica el value porque value se usa en scope local, no se modifica el global
+function duplicateValue(value) {
+	value = value*2;
+}
+
+duplicateObjectValue(object);
+//duplicateObjectValue2(object);
+duplicateValue(value);
+
+console.group('--- Scopes ---');
+console.log('The object value: %o', object);
+console.log('The variable value: %i', value);
+console.groupEnd();
+
+// ----- Scoping con objeto del DOM -----
+console.group('--- Scoping con objetos del DOM ---');
+
+function cambiarObjetoDOM(objDOM) {
+    console.log('Modifica contenido');
+    objDOM.innerHTML = 'Modificado en la funcion';
+}
+
+console.log('Obtiene el objeto del dom');
+var objDOM = document.getElementById('divPrueba');
+console.log('Setea contenido original');
+objDOM.innerHTML = 'Original';
+console.log('Ejecuta funcion de cambio de contenido');
+cambiarObjetoDOM(objDOM);
+console.groupEnd();
+
+// ----- Scoping general variables, objetos y objetos DOM -----
+
+console.group('--- Scoping general con variables, objetos js y objetos DOM ---');
+
+var variable = 1;
+var objDOM = document.getElementById('divPrueba2');
+objDOM.innerHTML = 'Original';
+var objJs = {  
+     propiedad1: 1
+    ,propiedad2: 2
+}
+
+function cambiarValores(variable, objDOM, objJs) {
+    variable = 2;
+    objDOM.innerHTML = 'Modificado';
+    objJs.propiedad1 = 3;
+    objJs.propiedad2 = 4;
+}
+
+console.log('Valores iniciales');
+console.log('Variable: %i',variable);
+console.log('objDOM: %o',objDOM);
+console.log('objJs: %o',objJs);
+
+
+console.log('Ejecuta la función');
+cambiarValores(variable, objDOM, objJs);
+
+console.log('Valores modificados');
+console.log('Variable: %i',variable);
+console.log('objDOM: %o',objDOM);
+console.log('objJs: %o',objJs);
+console.groupEnd();
+
+console.group('--- Ejemplo con objetos ---');
+var obj = { propiedad: 'valor original' }
+
+function modificar(obj) {
+    obj.propiedad = 'valor modificado';
+}
+console.log('Objeto original');
+console.dir(obj);
+
+modificar(obj); // El objeto a cambiado de estado porque fue pasado por referencia
+
+console.log('Objeto original luego de ejecutar la funcion');
+console.dir(obj);
+
+
+var obj2 = obj;
+obj2.propiedad = 'Nuevo valor modificado'; // El objeto original ha sido modificado nuevamente porque siempre se mantiene una referencia al original
+
+console.log('Objeto original luego de reasignar un valor a la propiedad');
+console.dir(obj);
+
+
+obj3 = new obj;
+obj3.propiedad = 'Ultimo valor modificado';
+
+console.log('Objeto original luego de hacer un clonado y cambiar la propiedad');
+console.dir(obj);
+
+console.groupEnd();
+
+
+// ----- Closures -----
+
+console.group('--- Closures ---');
+function create() {
+  var counter = 0;
+
+  function _incrementar() {
+    counter++;
+  }
+
+  return {
+    increment: function() {
+      _incrementar();
+    },
+    print: function() {
+      console.log(counter);
+    }
+  }
+}
+var c = create();  // Devuelve el objeto creado con su Contexto asociado (en donde esta la variable counter)
+c.increment();     // Incrementa el valor de counter en 1
+c.print(); // 1    // Imprime el valor de counter
+console.log(c.counter); // No existe counter por lo cual no puede imprimir. La propiedad counter es privada.
+c._incrementar(); // No existe
+
+console.groupEnd();
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

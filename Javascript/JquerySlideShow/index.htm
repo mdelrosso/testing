@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jQuery lightBox plugin</title>
+   	<link rel="stylesheet" type="text/css" href="css/jquery.lightbox-0.5.css" media="screen" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.lightbox-0.5.js"></script>
+    <script type="text/javascript" src="js/easySlider1.5.js"></script>
+        
+    <!-- Ativando o jQuery lightBox plugin y slideshow -->
+    <script type="text/javascript">
+		
+		
+		$(document).ready(function(){
+			$("#slider").easySlider({
+				continuous: true,
+				nextText: '',
+				prevText: '',
+				auto: true,
+				pause: 8000
+			});
+			
+			$('#slider a').lightBox({
+				overlayOpacity:0.0,
+				imageLoading:'http://www.tpvbooking.net/images/ajax_loading_chico_t.gif',
+				imageBtnClose:'http://www.tpvbooking.net/images/lightbox-close.gif',
+				imageBtnPrev:'http://www.tpvbooking.net/images/lightbox-prev.gif',
+				imageBtnNext:'http://www.tpvbooking.net/images/lightbox-next.gif',
+				imageBlank:'http://www.tpvbooking.net/images/lightbox-blank.gif',
+				txtImage: 'Image',
+				txtOf: 'of'
+
+			});
+			
+		});
+	
+    </script>
+    <!-- /Ativando o jQuery lightBox plugin y slideshow -->
+    
+   	<style type="text/css">
+		
+	#gallery { margin:0px;	padding:0px; }
+	#gallery ul { list-style:none;	margin:0px;	padding:0px; }
+	#gallery ul li { display:inline; margin-right:10px;  padding:0px; text-align:center; overflow:auto; }
+	
+	#slider ul img { border:1px solid #E2E2E2;	margin:0px; margin-bottom:10px;	padding:4px 4px 20px 4px; background-image:url(images/ico_lupa_1.gif); background-repeat:no-repeat; background-position:bottom right; }
+	#slider ul a:hover img { border:1px solid #999999; background-image:url(images/ico_lupa.gif); background-repeat:no-repeat; background-position:bottom right; }
+	
+		
+	#slider ul, #slider li{
+		margin:0;
+		padding:0;
+		list-style:none;
+		}
+	#slider li{ 
+		width:160px;
+		height:130px;
+		overflow:hidden; 
+		}
+		
+	#prevBtn, #nextBtn{ 
+		display:block;
+		width:10px;
+		height:10px;
+		position:absolute;
+	}	
+	
+	
+	/* Contenedores de los botones*/
+	#prevBtn {
+		border: 1px solid #e2e2e2;
+		background-color:#f8f8f8;
+		z-index:10;
+	}
+	
+	#nextBtn{ 
+		margin-left:148px;
+		border: 1px solid #e2e2e2;
+		background-color:#f8f8f8;
+		
+	}	
+	
+	/*Iconos de los botones*/													
+	#prevBtn a, #nextBtn a{  
+		margin:2px;
+		display:block;
+		width:10px;
+		height:10px;
+		background:url(images/ico_iz.png) no-repeat 0 0;	
+		}	
+	
+	#nextBtn a{ 
+		background:url(images/ico_der.png) no-repeat 0 0;	
+		}
+	
+	#slider a {
+		border:0px;
+	}
+	</style>
+</head>
+
+<body>
+
+
+<h2 id="example">Example</h2>
+<p>Click in the image and see the <strong>jQuery lightBox plugin</strong> in action.</p>
+
+
+
+<div id="slider">
+    <ul>
+        <li><a href="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/121872307048a43cfeef1c2.jpg&lado_mayor=640" title=""><img src="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/121872307048a43cfeef1c2.jpg&alto=100&ancho=150" alt="" /></a></li>
+        <li><a href="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/122900740249412a2a63bbe.jpg&lado_mayor=640" title=""><img src="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/122900740249412a2a63bbe.jpg&alto=100&ancho=150" alt="" /></a></li>
+        <li><a href="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/1213990994485c0852674cf.jpg&lado_mayor=640" title=""><img src="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/1213990994485c0852674cf.jpg&alto=100&ancho=150" alt="" /></a></li>
+        <li><a href="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/12156925664875ff16ea1b3.jpg&lado_mayor=640" title=""><img src="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/12156925664875ff16ea1b3.jpg&alto=100&ancho=150" alt="" /></a></li>
+        <li><a href="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/12156925664875ff16ea983.jpg&lado_mayor=640" title=""><img src="http://www.tpvbooking.net/includes/resampleo_imagen.php?url=../uploads/hoteles/12156925664875ff16ea983.jpg&alto=100&ancho=150" alt="" /></a></li>
+    </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+Ejemplos de como funciona el orden de prioridades entre las reglas css.
+
+
+***** Extracto de Notas sobre CSS.txt *****
+
+Prioridad de las declaraciones CSS:
+Ademas las hojas de estilos definidas por el usuario el navegador agrega 2 antes.
+La hoja de estilos del Navegador que define las propiedades por defecto
+La hoja de estilos del Usuario que define propiedad especiales, muy utiles para personas discapacitadas.
+La hoja de estilos del diseñador.
+
+El orden de prioridades es Navegador -> Usuarios -> Diseñador
+
+!Important:
+Sin embargo estas prioridades se ven alteradas si se utiliza la palabra reservada !important
+Ejemplo:
+p {
+    color: red !important;
+    color: blue;
+}
+El color del parrafo será rojo.
+Si no estuviera !important seria azul porque ante dos propiedades de igual prioridad se prioriza la ultima definida.
+
+Cuando se usa !important las prioridades de las hojas de estilos cambian.
+Navegador -> Usuarios -> Diseñador -> Diseñador Important -> Usuario Important
+
+Esto garantiza que ninguna regla priorizada por el usuario sea reemplazada por el diseñador.
+
+Prioridades según el tipo de declaración:
+De Menor a Mayor importancia:
+element -> class -> id -> inline
+Ejemplo: p {color: #f00; } -> .parrafo { color: #0f0; } -> #parrafo { color: #00f; }  -> style="color: #fff"
+Por supuesto si alguna de estas propiedades tiene !important entonces pasa a ser la de mayor prioridad.
+Si dos de ellas tuvieran !important entonces se elije según el orden original porque están al mismo nivel.
+
+Cuando 2 propiedades afectan al mismo elemento se toma en cuenta la última regla declarada.

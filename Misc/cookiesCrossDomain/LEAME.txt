@@ -1,0 +1,13 @@
+En algunos exploradores existe un problema con las cookies de sitios web que se muestran dentro de un iframe o que se consultan via peticiones ajax-cross domain.
+
+Ejemplo:
+Estando en: www.sitioprincipal.com
+Y teniendo un iframe o peticiones Ajax cross-domain a  www.sitiosecundario.com
+
+Las unicas cookies que se guardarán en el cliente son las de www.sitioprincipal.com
+
+Esto trae problemas a la hora de manejar aplicaciones que dependen de estas cookies para funcionar correctamente. 
+
+
+Para realizar estas pruebas hay que configurar correctamente los virtualhost del apache para simular los diferentes dominios
+
