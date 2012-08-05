@@ -1,0 +1,6 @@
+A partir de la explicación del screencasts y el diagrama uml que se entrega (tanto en formato StarUML como en jpg), deberán entregar un zip con la aplicación funcionando, por lo cual deberán traducir el diseño y completar todos los elementos que faltan.
+
+Criterio:
+
+opción1: por cada elemento que se agregue, exista un addAlgo (por cada uno), ej: addCamisa, addMedia, etc (el diseño no es perfecto, haremos una primera versión y luego veremos en la siguiente parte del curso cómo ajustarla).
+opción 2: se puede hacer un método add genérico para guardar todos los elementos del cajón (ambas opciones a esta altura del curso son válidas).

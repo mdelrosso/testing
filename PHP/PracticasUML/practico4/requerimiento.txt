@@ -1,0 +1,32 @@
+"Sistema de Manejo de Usuarios en Base de Datos"
+A partir de los ejemplos vertidos en los cap�tulos de referencia (14,15,16), 
+nuestro cliente acept� el presupuesto para  empezar a desarrollar la primera 
+funcionalidad del sistema de administraci�n de usuarios.
+
+***Requerimientos Funcionales
+
+1) Necesitamos crear objetos que puedan persistir sus datos de una tabla de 
+una base de datos.
+2) Deberemos contar con una clase Persona (que no podrá instanciarse) con la 
+siguiente información (los nombres de los atributos deben): nombre, apellido y 
+mail
+3) Deberemos contar con una clase Usuario, que a diferencia de Persona, tiene 
+adem�s los atributos id y nombreUsuario (en la tabla el nombre del campo ser� 
+nombre_usuario).
+4) Debemos contar con una clase Admin, que a diferencia de Usuario, tiene un 
+atributo �sistema� de tipo String con el nombre al sistema que puede acceder y la 
+fecha del �ltimo ingreso (atributo fechaUltimoIngreso, campo de la tabla 
+fecha_ultimo_ingreso).
+5) Tanto Usuario como Admin deber� tener un m�todo load(Integer:id) que 
+recuperar� de la base de datos la informaci�n correspondiente a ese usuario 
+(hago new sin datos, luego load(1), y si hago echo $admin o echo $usuario me 
+tiene que decir el nombre_usuario).
+6) Tanto Usuario como Admin deber� tener un m�todo save() que persistir� la 
+informaci�n en la tabla correspondiente a un usuario nuevo (hago new con datos 
+y luego save() y los datos se deben persistir).
+
+***Requerimientos No Funcionales
+1) Dise�o UML de la soluci�n completa
+2) Persistencia: se debe usar el dise�o del cap�tulo 16
+3) La base de datos debe llamarse �surforce� y las tablas �usuarios� y �admins�.
+4) El sistema debe ser funcional (se probar� contra una base de datos real)

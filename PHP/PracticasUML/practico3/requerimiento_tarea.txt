@@ -1,0 +1,23 @@
+"Empresa de desarrollo de Software"
+
+A partir del diseño entregado, se requiere implementar el siguiente sistema (siguiendo 
+ESTRICTAMENTE las instrucciones del UML):
+
+"En la empresa SURFORCE tenemos actualmente dos proyectos de desarrollo, 
+uno se llama CORE y otro SOCIAL, cada uno tiene un gerente designado y tres 
+desarrolladores, todos dominan PHP5 pero solo uno PHP5 y Zend Framework. 
+
+La administración de la empresa necesita tener un listado de todos los proyectos 
+existentes y sus integrantes, y la cantidad de lenguajes que domina cada uno de 
+ellos. También se desea buscar al desarrollador con nombre "Linus", ya que se 
+sabe que trabaja en la empresa, pero no en qué proyecto trabaja. "
+
+Atención: se verificará  que el diagrama cumpla cada una de las relaciones y 
+particularmente que los  require_once deban estar en todas las clases que tienen 
+relaciones y prestar especial atención con las clases que no tienen relación con otra 
+clase. 
+
+Cualquier duda con el “arquitecto” de la solución deberá ser consultada 
+puntualmente en los foros de la empresa. 
+
+Regla: "No asuman nada"

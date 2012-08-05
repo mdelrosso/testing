@@ -1,0 +1,11 @@
+Repaso de Conceptos
+1) ¿Cómo se traduce una relación de Agregación a código fuente?
+2) Explique qué significa el término: “colección” 
+3) ¿Cuál considera que podría ser la diferencia entre setAtributo y addAtributo?
+4) ¿Qué función cumple el constructor de un objeto? ¿Cuándo lo debemos usar y con 
+qué información?
+5) ¿Por qué razón no hay que cerrar nuestros fuentes con “?>”?
+6) ¿Qué sucede si desde una clase A no existe una Flecha hacia una clase B?
+7) ¿Qué sucede si desde una clase A y una clase B salen flechas hacia una clase C? 
+¿En cual clase PHP iría un require_once? ¿En A, en B, en ambas? Justifique  su 
+respuesta
