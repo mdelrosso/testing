@@ -1,0 +1,92 @@
+<script>
+
+function validateCreditCard(card) {
+
+            var cadena = card.toString();
+			var longitud = cadena.length-1;
+			var k = 1;
+			var suma = 0;
+			var i = 0;
+
+			for (i=longitud; i>=0; i--) {
+				if (k%2) {
+					cifra = parseInt(cadena.charAt(i));
+				} else {
+					cifra = parseInt(cadena.charAt(i))*2;
+				}
+
+				if (cifra > 9) {
+					cifra_cad = cifra.toString();
+					cifra = parseInt(cifra_cad.charAt(0)) + parseInt(cifra_cad.charAt(1));
+				}
+
+				suma = suma + cifra;
+				k++;
+			}
+
+			if (((suma % 10) == 0) && suma <=150) {
+				return true;
+			} else {
+				return false;
+			}
+
+   
+}
+
+
+function completeWithZeros(number, length){
+    
+    var numTmp = number.toString();
+	var numLength = numTmp.length;
+	
+    if (length > numLength) {
+        var toComplete = length - numLength;
+        var ceros = '';
+        
+        for(i=1; i<=toComplete ; i++) {
+            ceros +='0';
+        }
+        
+        numTmp = ceros+numTmp;
+    
+    }
+    
+    return numTmp;
+
+}
+
+
+var number = '411111111111' // Le faltan los ultimos 4
+var start = 0;
+var end = 9999;
+
+var x = 0;
+var testNumber = 0;
+
+var cont = 0;
+
+for (x=start; x<=end ; x++) {
+
+    testNumber =  number + completeWithZeros(x,4);
+    
+    if ( validateCreditCard(testNumber)  ) {
+        
+        //console.log(testNumber);
+        cont++;
+        
+    }
+
+
+}
+
+console.log(cont);
+
+//console.log( completeWithZeros(3,4) );
+//console.log( completeWithZeros(1233,4) );
+//console.log(validateCreditCard(450979009370));
+
+
+
+
+</script>
+
