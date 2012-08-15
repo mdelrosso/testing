@@ -55,6 +55,15 @@ function completeWithZeros(number, length){
 
 }
 
+/*
+ * La idea es testear que cantidad de numeros válidos de tarjeta de crédito pueden formarse
+ * si se tienen los primero 12 digitos de una tarjetas.
+ * 
+ * El resultado: Se pueden obtener 1000 tarjetas distintas.
+ *
+ * Si un hacker obtuviera los primeros 12 digitos deberia intentar máximo 1000 veces
+ * antes de lograr dar con el numero correcto. 
+ */
 
 var number = '411111111111' // Le faltan los ultimos 4
 var start = 0;
@@ -70,22 +79,13 @@ for (x=start; x<=end ; x++) {
     testNumber =  number + completeWithZeros(x,4);
     
     if ( validateCreditCard(testNumber)  ) {
-        
-        //console.log(testNumber);
         cont++;
-        
     }
 
 
 }
 
-console.log(cont);
-
-//console.log( completeWithZeros(3,4) );
-//console.log( completeWithZeros(1233,4) );
-//console.log(validateCreditCard(450979009370));
-
-
+console.log('Cantidad de tarjetas validas: ' + cont);
 
 
 </script>
