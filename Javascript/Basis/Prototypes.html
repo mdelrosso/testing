@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Prototypes</title>
+</head>
+
+<body>
+
+<h1>Prototypes</h1>
+
+
+
+<script>
+
+
+// ----- Objetos literales y Object.prototype -----
+console.group('Objetos literales y Object.prototype');
+Object.prototype.age = 56; // Every object is linked to Object.prototype by default
+
+// Objeto literal
+var person = {  
+    "First_Name": "Barry",  
+    "Last_Name": "Steyn",
+    "do_Something": function() { alert('something'); }
+}
+
+/** 
+ * Todos los objetos en javascript tiene un link oculto al objeto principal de javascript
+ * Todos son construidos como prototipos de ese objeto por lo cual person "hereda" la propiedad
+ * age del objeto original
+ */
+console.log(person.age);
+console.groupEnd();
+
+
+
+// ----- Funciones y Function.prototype -----
+console.group('Funciones y Function.Prototype');
+
+var addNum = function(num1, num2) {
+    return num1 + num2;
+}
+
+console.log( addNum(4,3) ) // 7
+
+// Se agrega una funcion global a todas las funciones
+Function.prototype.divide = function(num1,num2) {
+    return num1 / num2;
+}
+
+// Ahora puede utilizarse
+console.log( addNum.divide(10,2) ); // 5
+
+// Y como las funciones son tambien objetos
+// se puede usar tambien usando un objeto a partir de una funcion
+var obj = new addNum();
+console.log( addNum.divide(10,2) ); // 5
+
+
+console.groupEnd();
+
+
+
+console.group('Ejemplo integrador');
+
+Object.prototype.genero = 'Masculino';
+Function.prototype.edad = 50;
+
+
+// Un objeto de funcion
+var Entity = function(name) {
+    this.name = name;
+}
+
+var alien = new Entity('Yoda');
+
+// Modifico el prototipo agregandole un objeto
+Entity.prototype = {
+    especie: 'humano'
+}
+
+var humano = new Entity('Mariano');
+
+console.log(alien.especie); // undefined: Porque todavia no tenia definida la propiedad especie
+console.log(humano.especie); // humano: porque fue redefinido y se le agrego la propiedad
+
+console.log(humano.edad); //  undefined: Porque al ser creado con new se creo un objeto y no tiene el link a Function.prototype
+console.log(humano.genero); //  Masculino: Porque genero esta en el Object.prototype al cual si se tiene acceso siempre.
+
+console.log(Entity.edad); //  50: Es un objeto funcion y hereda de Function.prototype por eso tiene acceso
+console.log(Entity.genero); //  Masculino: Ademas de una función tambien es un objeto por lo cual tambien tiene acceso a Object.prototype
+
+
+console.groupEnd();
+
+
+
+console.group('Create Method');
+
+
+    if (typeof Object.create !== 'function') { //If working with a version of Javascript prior to 1.8.5
+
+        // Crear siempre los objetos como una "funcion Objeto"
+        Object.create = function(o) {
+            var F = function() {};
+            F.prototype = o;
+            return new F();
+        }
+    }
+
+    // Seteo propiedades globales
+    Object.prototype.genero = 'Masculino';
+    Function.prototype.edad = 30;
+
+
+    // Objeto literal
+    var Entidad2 = {
+        nombre: 'Mariano'
+    }
+
+    // Objeto funcion
+    var Entidad3 = function() {}
+    Entidad3.nombre = 'Mariano';
+
+
+    console.group('Pruebas de linkeo a Object.prototype y Function.prototype');
+    console.log(Entidad2.nombre); // Mariano
+    console.log(Entidad2.genero); // Masculino: Porque genero esta para todos los objetos
+    console.log(Entidad2.edad); // undefined: Porque edad esta definido para todas las funciones objeto y Entidad2 es un objeto literal
+
+    console.log(Entidad3.nombre); // Mariano
+    console.log(Entidad3.genero); // Masculino: Porque genero esta para todos los objetos
+    console.log(Entidad3.edad); // 30: Porque Entidad3 es una funcion objeto y puede acceder a Function.prototype
+    console.groupEnd();
+
+    // Usando new
+    console.group('Usando new');
+    // var e2 = new Entidad2; // Error no se puede construir en base a Entidad 2 porque no es un constructor
+
+    var e3 = new Entidad3;
+    console.log(e3.nombre); // undefined: Porque al crear una copia de Entidad3 ya no se toma en cuenta Entidad3.nombre
+    console.log(e3.genero); // Masculino: Porque genero esta para todos los objetos sean del tipo que sean
+    console.log(e3.edad); // undefined: Porque Entidad3 ahora creo un objeto y ya no puede acceder a Function.prototype
+
+    console.groupEnd();
+
+    // Usando create
+    console.group('Usando Create Method');
+    var e2 = Object.create(Entidad2);
+    var e3 = Object.create(Entidad3);
+
+    console.log(e2.nombre); // Mariano: 
+    console.log(e2.genero); // Masculino: Porque genero esta para todos los objetos sean del tipo que sean
+    console.log(e2.edad); // undefined: Porque es un objeto y no tiene el link a la Function.prototype
+
+    console.log(e3.nombre); // Mariano: 
+    console.log(e3.genero); // Masculino: Porque genero esta para todos los objetos sean del tipo que sean
+    console.log(e3.edad); // 30:
+
+    console.groupEnd();
+
+console.groupEnd();
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Function invocations patterns test</title>
+</head>
+
+<body>
+<h1>Function invocations patterns test</h1>
+
+
+<script>
+
+/**
+ * Hay mas de una forma de invocar funciones en javascript.
+ * La gran diferencia entre cada una es la forma en que this se utiliza.
+ */
+
+ 
+/** 
+ * 1) Method invocation
+ * 
+ *  Invocar una función como parte de un objeto "obj.nombreFunction()"
+ *
+ *  "this" se bindea automáticamente al objeto contenedor de la función
+ */
+
+var obj = {
+    value: 0,
+    increment: function() {
+        this.value +=1;
+    }
+}
+console.group('1. Method invocation');
+
+    // Increment internal value
+    obj.increment();
+    
+    // Imprimirá 1 porque el metodo anterior incrementó el valor
+    console.log(obj.value);
+
+console.groupEnd();
+
+
+/** 
+ * 2) Function invocation
+ * 
+ *  Es cuando se invoca la funcion usando "nombreFuncion()"
+ *
+ *  "this" se bindea al global object
+ * 
+ *  Esto puede producir errores cuando se usan inner function dentro de metodos
+ */ 
+ 
+ 
+var value = 500; // Global variable
+var obj = {
+    value: 0,
+    increment: function() {
+        this.value++;
+        
+        var innerFunction = function() {
+            console.log('Value from inner function: ' + this.value);
+        }
+        
+        innerFunction();
+    },
+    // Hack para que funcione bien el scope
+    incrementFixed: function() {
+        
+        this.value++;
+        
+        var that = this;
+        
+        var innerFunction = function() {
+            console.log('Value from inner function FIXED: ' + that.value);
+        }
+        
+        innerFunction();
+    }
+}
+
+console.group('2. Function invocation');
+
+    // Esto imprime 500 porque la inner funcion tiene "this" bindeado al global object
+    obj.increment(); 
+
+    // Reseteo el valor para que funcione correctamente el ejemplo
+    obj.value = 0;
+
+    // Esto imprime 1 porque se ha corregido el "error"
+    obj.incrementFixed();
+
+console.groupEnd();
+
+
+/** 
+ * 3) Constructor invocation
+ * 
+ *  Esto es el resultado de mixear la orientación a prototipos
+ *  con la sintaxis de objetos. Un verdadero problema!
+ *  
+ *  Es cuando se ejecuta una función pero con el new adelante: new nombreFunction()
+ * 
+ *  Para mejorar esto se extiende el objeto global con un create que hace de constructor
+ *  Object.create();
+ *
+ */ 
+var Cheese = function(type) {
+    cheeseType = type;
+    return cheeseType;
+}
+
+
+console.group('3. Constructor invocation');
+
+    // Si se usa como funcion, devuelve el return correcto
+    console.log(Cheese('cheddar'));
+
+    // Si se construye con "new" devuelve un objeto del tipo "Cheese"
+    console.log(new Cheese('cheddar'));
+    
+console.groupEnd();
+
+
+/** 
+ * 4) Apply invocation
+ * 
+ *  Es una manera de invocar "manualmente" funciones
+ *  Lo que permite es establecer el scope a mano
+ *  
+ *  The first parameter is an object to bind the this parameter to, 
+ *  the second is an array which is mapped to the parameters
+ *
+ */ 
+
+console.group('4. Apply invocation');
+
+    // Primer ejemplo
+    var add = function(num1, num2) {
+            return num1+num2;
+    }
+
+    array = [3,4];
+    console.log(add.apply(null,array)); //7
+    
+    // Segundo ejemplo
+    var obj = {
+        data:'Hello World'
+    }
+
+    var displayData = function() {
+        console.log(this.data);
+    }
+
+    displayData(); //undefined
+    displayData.apply(obj); //Hello World
+
+console.groupEnd();
+
+</script>
+
+</body>
+</html>
